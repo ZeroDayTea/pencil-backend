@@ -421,13 +421,13 @@ const syncAllAppointments = async (req, res) => {
                   break;
                 }
               }
-              // if (!findVal) {
-              //   await ScheduleItem.destroy({
-              //     where: {
-              //       _id: schedule[k]['ScheduleItems._id'],
-              //     },
-              //   });
-              // }
+              if (!findVal) {
+                await ScheduleItem.destroy({
+                  where: {
+                    _id: schedule[k]['ScheduleItems._id'],
+                  },
+                });
+              }
             }
             // eslint-disable-next-line no-plusplus
             for (let j = 0; j < inviteeevent.collection.length; ++j) {
@@ -483,9 +483,9 @@ const syncAllAppointments = async (req, res) => {
             }
           }
         }
-        const delay = Math.floor(Math.random() * 20) + 2;
-        console.log('bidenzz', delay);
-        sleep(delay * 1000);
+        //const delay = Math.floor(Math.random() * 20) + 2;
+        //console.log('bidenzz', delay);
+        sleep(1000);
       }
       if (event.pagination.next_page) {
         const newEvent = await fetch(url, options).then((response) =>
@@ -496,9 +496,9 @@ const syncAllAppointments = async (req, res) => {
         hasNext = false;
         break;
       }
-      const delay = Math.floor(Math.random() * 20) + 2;
-      console.log(delay);
-      sleep(delay * 1000);
+      //const delay = Math.floor(Math.random() * 20) + 2;
+      //console.log(delay);
+      sleep(1000);
     }
     return res.status(204);
   } catch (err) {
