@@ -140,4 +140,5 @@ module.exports = {
   getDashboardTransactions,
   getDailyMonthlyStats,
   getYearlyStats,
+  getAllStats,
 };
