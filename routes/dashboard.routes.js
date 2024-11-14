@@ -7,6 +7,13 @@ const router = express.Router();
 router.use(authController.requireLogin);
 
 router
+  .route('/stats').get(
+    dashboardController.getDashboardSchedules,
+    dashboardController.getDashboardTransactions,
+    dashboardController.getAllStats
+  );
+
+router
   .route('/dailystats')
   .get(
     dashboardController.getDashboardSchedules,

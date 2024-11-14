@@ -115,6 +115,26 @@ const getYearlyStats = async (req, res) => {
   }
 };
 
+// optimize to make only one database transaction instead of 3 separate ones
+const getAllStats = async (req, res) => {
+  try {
+    const { schedules, transactions, numAppointments, totalValue } = req;
+
+    const dailyStats = computeDailyStats(schedules, transactions);
+    const monthlyStats = computeMonthlyStats(schedules, transactions);
+    const yearlyStats = computeYearlyStats(schedules, transactions);
+
+    return res.status(200).json({
+      daily: dailyStats,
+      monthly: monthlyStats,
+      yearly: yearlyStats,
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send('Cannot retrieve stats');
+  }
+};
+
 module.exports = {
   getDashboardSchedules,
   getDashboardTransactions,
